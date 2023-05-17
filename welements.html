@@ -13,7 +13,6 @@
         .element {
             height: 90px;
             width: 90px;
-            background-color: #365977;
             border-radius: 15px;
             margin: 5px;
             color: white;
@@ -23,8 +22,52 @@
             grid-template-areas:
                 "Number1 Number1 Number2 Number2" 
                 "Symbol Symbol Symbol Symbol" 
-                "Name Name Name Name" ;
+                "Name Name Name Name";
         }
+
+        .standard{
+            background-color: #365977;
+        }
+        
+        .metal{
+            background-color: #af95c4;
+        }
+
+        .metalloid{
+            background-color: #f1ce37;
+        }
+
+        .halogen, .nonmetal{
+            background-color: #acc780;
+        }
+
+        .alkali.metal{
+            background-color: #b32430;
+        }
+
+        .alkaline.earth.metal{
+            background-color: #e3a632;
+        }
+
+        .transition.metal{
+            background-color: #a2bde1;
+        }
+
+        .noble.gas{
+            background-color: #e4b0c9;
+        }
+
+        
+
+        .lanthanoid{
+            background-color: #5996d1;
+        }
+
+        .actinoid{
+            background-color: #92c6a9;
+        }
+
+
 
         .element-title{
             grid-area: Symbol;
@@ -48,6 +91,11 @@
             grid-area: Name;
             text-align: center;
         }
+
+        #images{
+            display: flex;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 
@@ -69,9 +117,9 @@
             <input type="text" id="text-input" value="">
             <button onclick="toElementNum()">To Element-Num</button>
             <button onclick="toWord()">To Word</button>
-            <output id="output"></output>
+            <input type="tex" id="output" value=""/>
             <button disabled id="copy-btn" onclick="copyToClipBoard()">Copy</button>
-            <div id="images" style="display: flex;"></div>
+            <div id="images"></div>
         </div>
     </main>
 
@@ -234,7 +282,7 @@
                 }
                 else {
                     x = 1
-                    element = { atomicNumber: 0, symbol: input.substr(i, 1) }
+                    element = { atomicNumber: 0, symbol: input.substr(i, 1), groupBlock: "standard" }
                 }
                 console.log(i, x, element.symbol)
                 result = [...result, { index: i, element: element }]
@@ -246,7 +294,9 @@
         }
 
         function toWord() {
-
+            inElements = output.value.split(" ")
+            let text = inElements.map(el => isNaN(el) ? el : elements.find(element => element.atomicNumber == el).symbol).join("");
+            setInput(text)
         }
 
         function getInput() {
@@ -259,10 +309,15 @@
             output.value = text;
             images.innerHTML = elements
                 .sort((a, b) => a.index - b.index)
-                .map(element => "<div class='element'><div class='element-number1'>" + (element.element.atomicNumber !== 0 ? element.element.atomicNumber : " ") + "</div><div class='element-number2'>" + (element.element.atomicMass ? element.element.atomicMass : " ") + "</div><div class='element-title'>" + element.element.symbol + "</div><div class='element-name'>" + (element.element.name ? element.element.name : " ") + "</div></div>")
+                .map(element => "<div class='element " + element.element.groupBlock + " '><div class='element-number1'>" + (element.element.atomicNumber !== 0 ? element.element.atomicNumber  : " ") + "</div><div class='element-number2'>" + (element.element.atomicMass ? element.element.atomicMass : " ") + "</div><div class='element-title'>" + element.element.symbol + "</div><div class='element-name'>" + (element.element.name ? element.element.name : " ") + "</div></div>")
                 .join("")
             copyBtn.innerHTML = "Copy";
             copyBtn.disabled = false;
+        }
+
+        function setInput(text){
+            console.log(text)
+            textInput.value = text;
         }
 
         function copyToClipBoard() {
