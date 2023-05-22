@@ -25,12 +25,12 @@ a:hover{
     transition: 0.2s;
 }
 
-li a{
+nav a{
     text-decoration: none;
     color: white;
 }
 
-li a:hover{
+nav a:hover{
     color: gray;
     transition: 0.2s;
 }
