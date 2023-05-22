@@ -300,7 +300,7 @@
         }
 
         function getInput() {
-            return textInput.value.replace(" ", "_");
+            return textInput.value.replaceAll(" ", "_");
         }
 
         function setOutput(elements) {
@@ -317,7 +317,7 @@
 
         function setInput(text){
             console.log(text)
-            textInput.value = text.replace("_", " ").toUpperCase();
+            textInput.value = text.replaceAll("_", " ").toUpperCase();
         }
 
         function copyToClipBoard() {
