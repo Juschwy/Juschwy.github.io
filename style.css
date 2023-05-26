@@ -37,7 +37,7 @@ nav a:hover{
 
 header{
     background-color: rgba(0, 0, 0);
-    height: 10%;
+    height: 71px;
     display: flex;
     justify-content: space-between;
     align-items: center;
