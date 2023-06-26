@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="https://i.scdn.co/image/ab6775700000ee8542a26560309f4551e4bf4034">
     <style>
         .webcam{
-            height: 200px;
+            height: 355px;
         }
     </style>
 </head>
@@ -53,12 +53,12 @@
             function toggleMonitoring(){
                 if(intervallId){
                     clearInterval(intervallId);
+                    intervallId = undefined;
                     monitoringBtn.innerHTML = "Start Monitoring"
                 }
                 else{
                     monitoringBtn.innerHTML = "Stop Monitoring";
                     intervallId = setInterval(() => {
-                        console.log("Actualizing Images");
                         refreshImage(webcamWest, "https://camwest.cumulus-segelflug.ch/snapshot.cgi");
                         refreshImage(webcamOst, "https://camost.cumulus-segelflug.ch/snapshot.cgi");
                         refreshImage(webcamNord, "https://camnord.cumulus-segelflug.ch/snap.jpeg");
