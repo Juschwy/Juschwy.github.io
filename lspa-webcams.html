@@ -9,8 +9,12 @@
     <title>Juschwy</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="https://i.scdn.co/image/ab6775700000ee8542a26560309f4551e4bf4034">
+    <style>
+        .webcam{
+            height: 100px;
+        }
+    </style>
 </head>
-
 <body>
     <header>
         <div class="verticalList">
@@ -26,9 +30,9 @@
         <div>
             <h1>LSPA-Webcams</h1>
             <button id="monitoring-btn" onclick="toggleMonitoring">Start Monitoring</button>
-            <img id="webcam-west" src="https://camwest.cumulus-segelflug.ch/snapshot.cgi" alt="LSPA-Webcam-West">
-            <img id="webcam-ost" src="https://camost.cumulus-segelflug.ch/snapshot.cgi" alt="LSPA-Webcam-Ost">
-            <img id="webcam-nord" src="https://camnord.cumulus-segelflug.ch/snap.jpeg" alt="LSPA-Webcam-Nord">
+            <img class="webcam" id="webcam-west" src="https://camwest.cumulus-segelflug.ch/snapshot.cgi" alt="LSPA-Webcam-West">
+            <img class="webcam" id="webcam-ost" src="https://camost.cumulus-segelflug.ch/snapshot.cgi" alt="LSPA-Webcam-Ost">
+            <img class="webcam" id="webcam-nord" src="https://camnord.cumulus-segelflug.ch/snap.jpeg" alt="LSPA-Webcam-Nord">
         </div>
         <script>
             const monitoringBtn = document.querySelector("#monitoring-btn");
@@ -52,12 +56,14 @@
                     monitoringBtn.innerHTML = "Start Monitoring"
                 }
                 else{
+                    monitoringBtn.innerHTML = "Stop Monitoring";
                     intervallId = setInterval(() => {
+                        console.log("Actualizing Images");
                         refreshImage(webcamWest, "https://camwest.cumulus-segelflug.ch/snapshot.cgi");
                         refreshImage(webcamOst, "https://camost.cumulus-segelflug.ch/snapshot.cgi");
                         refreshImage(webcamNord, "https://camnord.cumulus-segelflug.ch/snap.jpeg");
                     }, 1000);
-                    monitoringBtn.innerHTML = "Stop Monitoring"
+                
                 }
             }
         </script>
