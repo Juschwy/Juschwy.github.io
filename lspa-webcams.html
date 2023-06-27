@@ -23,15 +23,15 @@
             <h1>JUSCHWY</h1>
         </div>
         <nav>
-            <a href="/index">Start</a>
-            <a href="/projects">Projects</a>
+            <a href="./index.html">Start</a>
+            <a href="./projects.html">Projects</a>
         </nav>
     </header>
     <main>
         <div>
             <h1>LSPA-Webcams<span id="point">●</span></h1>
             <button id="monitoring-btn" onclick="toggleMonitoring()">Start Monitoring</button><br>
-            <label for="refresh-speed-range">Refresh-Speed</label>
+            <label id="refresh-speed-range-label" for="refresh-speed-range">Refresh-Speed 1000ms</label>
             <input id="refresh-speed-range" type="range" min="250" max="5000" step="500" value="1000">
             <br>
             <img class="webcam" id="webcam-west" src="https://camwest.cumulus-segelflug.ch/snapshot.cgi"
@@ -88,6 +88,7 @@
             function changeRefreshSpeed(e) {
                 console.log("test")
                 refreshSpeed = e.target.value;
+                document.querySelector("#refresh-speed-range-label").innerHTML = "Refresh Speed " + refreshSpeed + "ms";
                 if (intervallId) {
                     clearInterval(intervallId);
                     intervallId = setInterval(updateImages, refreshSpeed)
@@ -107,8 +108,8 @@
     <footer>
         <p> ©JUSCHWY</p>
         <div class="vertivalList">
-            <a href="/rickTheRoll">Impressum</a>
-            <a href="/rickTheRoll">Kontakt</a>
+            <a href="./rickTheRoll.html">Impressum</a>
+            <a href="./rickTheRoll.html">Kontakt</a>
         </div>
     </footer>
 </body>
