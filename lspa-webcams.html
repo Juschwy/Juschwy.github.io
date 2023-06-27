@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="https://i.scdn.co/image/ab6775700000ee8542a26560309f4551e4bf4034">
     <style>
-        .webcam{
+        .webcam {
             height: 355px;
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="verticalList">
@@ -28,18 +29,30 @@
     </header>
     <main>
         <div>
-            <h1>LSPA-Webcams</h1>
+            <h1>LSPA-Webcams<span id="point">●</span></h1>
             <button id="monitoring-btn" onclick="toggleMonitoring()">Start Monitoring</button><br>
-            <img class="webcam" id="webcam-west" src="https://camwest.cumulus-segelflug.ch/snapshot.cgi" alt="LSPA-Webcam-West">
-            <img class="webcam" id="webcam-ost" src="https://camost.cumulus-segelflug.ch/snapshot.cgi" alt="LSPA-Webcam-Ost">
-            <img class="webcam" id="webcam-nord" src="https://camnord.cumulus-segelflug.ch/snap.jpeg" alt="LSPA-Webcam-Nord">
+            <label for="refresh-speed-range">Refresh-Speed</label>
+            <input id="refresh-speed-range" type="range" min="500" max="5000" step="500" value="1000">
+            <br>
+            <img class="webcam" id="webcam-west" src="https://camwest.cumulus-segelflug.ch/snapshot.cgi"
+                alt="LSPA-Webcam-West">
+            <img class="webcam" id="webcam-nord" src="https://camnord.cumulus-segelflug.ch/snap.jpeg"
+                alt="LSPA-Webcam-Nord">
+            <img class="webcam" id="webcam-ost" src="https://camost.cumulus-segelflug.ch/snapshot.cgi"
+                alt="LSPA-Webcam-Ost">
+            <br>
+            <iframe src="http://www.flightradar24.com/simple_index.php?lat=47.57403&lon=9.04808&z=12" width="600"
+                height="600"></iframe>
         </div>
         <script>
             const monitoringBtn = document.querySelector("#monitoring-btn");
             const webcamWest = document.querySelector("#webcam-west");
             const webcamOst = document.querySelector("#webcam-ost");
             const webcamNord = document.querySelector("#webcam-nord");
+            const point = document.querySelector("#point");
+            let pointBoolean = false;
             let intervallId;
+            let refreshSpeed = 1000;
 
             function refreshImage(imgElement, imgURL) {
                 // create a new timestamp 
@@ -48,24 +61,47 @@
                 const queryString = "?t=" + timestamp;
 
                 imgElement.src = imgURL + queryString;
-            }   
+            }
 
-            function toggleMonitoring(){
-                if(intervallId){
+            function changePoint() {
+                if (pointBoolean) {
+                    point.style.color = "red";
+                }
+                else {
+                    point.style.color = "black";
+                }
+                pointBoolean = !pointBoolean;
+            }
+
+            function toggleMonitoring() {
+                if (intervallId) {
                     clearInterval(intervallId);
                     intervallId = undefined;
                     monitoringBtn.innerHTML = "Start Monitoring"
                 }
-                else{
+                else {
                     monitoringBtn.innerHTML = "Stop Monitoring";
-                    intervallId = setInterval(() => {
-                        refreshImage(webcamWest, "https://camwest.cumulus-segelflug.ch/snapshot.cgi");
-                        refreshImage(webcamOst, "https://camost.cumulus-segelflug.ch/snapshot.cgi");
-                        refreshImage(webcamNord, "https://camnord.cumulus-segelflug.ch/snap.jpeg");
-                    }, 1000);
-                
+                    intervallId = setInterval(updateImages, refreshSpeed);
                 }
             }
+
+            function changeRefreshSpeed(e) {
+                console.log("test")
+                refreshSpeed = e.target.value;
+                if (intervallId) {
+                    clearInterval(intervallId);
+                    intervallId = setInterval(updateImages, refreshSpeed)
+                }
+            }
+
+            function updateImages() {
+                refreshImage(webcamWest, "https://camwest.cumulus-segelflug.ch/snapshot.cgi");
+                refreshImage(webcamOst, "https://camost.cumulus-segelflug.ch/snapshot.cgi");
+                refreshImage(webcamNord, "https://camnord.cumulus-segelflug.ch/snap.jpeg");
+                changePoint();
+            }
+
+            document.querySelector("#refresh-speed-range").addEventListener("input", (e) => changeRefreshSpeed(e));
         </script>
     </main>
     <footer>
