@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Juschwy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="https://i.scdn.co/image/ab6775700000ee8542a26560309f4551e4bf4034">
+    <style>
+        .webcam {
+            height: 355px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="verticalList">
+            <img src="https://i.scdn.co/image/ab6775700000ee8542a26560309f4551e4bf4034" alt="Logo">
+            <h1>JUSCHWY</h1>
+        </div>
+        <nav>
+            <a href="index.html">Start</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <h1>LSPA-Webcams<span id="point">●</span></h1>
+            <button id="monitoring-btn" onclick="toggleMonitoring()">Start Monitoring</button><br>
+            <label id="refresh-speed-range-label" for="refresh-speed-range">Refresh-Speed 1000ms</label>
+            <input id="refresh-speed-range" type="range" min="100" max="2000" step="1" value="1000">
+            <br>
+            <img class="webcam" id="webcam-west" src="https://camwest.cumulus-segelflug.ch/snapshot.cgi"
+                alt="LSPA-Webcam-West">
+            <img class="webcam" id="webcam-nord" src="https://camnord.cumulus-segelflug.ch/snap.jpeg"
+                alt="LSPA-Webcam-Nord">
+            <img class="webcam" id="webcam-ost" src="https://camost.cumulus-segelflug.ch/snapshot.cgi"
+                alt="LSPA-Webcam-Ost">
+            <br>
+            <iframe src="https://www.flightradar24.com/simple_index.php?lat=47.57403&lon=9.04808&z=12" width="600"
+                height="600"></iframe>
+        </div>
+        <script>
+            const monitoringBtn = document.querySelector("#monitoring-btn");
+            const webcamWest = document.querySelector("#webcam-west");
+            const webcamOst = document.querySelector("#webcam-ost");
+            const webcamNord = document.querySelector("#webcam-nord");
+            const point = document.querySelector("#point");
+            let pointBoolean = false;
+            let intervallId;
+            let refreshSpeed = 1000;
+
+            function refreshImage(imgElement, imgURL) {
+                // create a new timestamp 
+                const timestamp = new Date().getTime();
+
+                const queryString = "?t=" + timestamp;
+
+                imgElement.src = imgURL + queryString;
+            }
+
+            function changePoint() {
+                if (pointBoolean) {
+                    point.style.color = "red";
+                }
+                else {
+                    point.style.color = "black";
+                }
+                pointBoolean = !pointBoolean;
+            }
+
+            function toggleMonitoring() {
+                if (intervallId) {
+                    clearInterval(intervallId);
+                    intervallId = undefined;
+                    monitoringBtn.innerHTML = "Start Monitoring"
+                }
+                else {
+                    monitoringBtn.innerHTML = "Stop Monitoring";
+                    intervallId = setInterval(updateImages, refreshSpeed);
+                }
+            }
+
+            function changeRefreshSpeed(e) {
+                console.log("test")
+                refreshSpeed = e.target.value;
+                document.querySelector("#refresh-speed-range-label").innerHTML = "Refresh Speed " + refreshSpeed + "ms";
+                if (intervallId) {
+                    clearInterval(intervallId);
+                    intervallId = setInterval(updateImages, refreshSpeed)
+                }
+            }
+
+            function updateImages() {
+                refreshImage(webcamWest, "https://camwest.cumulus-segelflug.ch/snapshot.cgi");
+                refreshImage(webcamOst, "https://camost.cumulus-segelflug.ch/snapshot.cgi");
+                refreshImage(webcamNord, "https://camnord.cumulus-segelflug.ch/snap.jpeg");
+                changePoint();
+            }
+
+            document.querySelector("#refresh-speed-range").addEventListener("input", (e) => changeRefreshSpeed(e));
+        </script>
+    </main>
+    <footer>
+        <p> ©JUSCHWY</p>
+        <div class="vertivalList">
+            <a href="rickTheRoll.html">Impressum</a>
+            |
+            <a href="rickTheRoll.html">Kontakt</a>
+        </div>
+    </footer>
+</body>
+
+</html>
