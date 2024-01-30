@@ -1,0 +1,25 @@
+footer {
+    width: 100%;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    div{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        a{
+            color: black;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        a:hover{
+            color: white;
+        }
+    }
+}

@@ -19,7 +19,7 @@ header {
         }
     }
 
-    nav{
+    nav {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -29,12 +29,12 @@ header {
         a {
             color: white;
             text-decoration: none;
+            transition: 0.3s;
         }
 
-        a:hover{
-             color: gray;
-            transition: 0.3s;
-         }
+        a:hover {
+            color: gray;
+        }
     }
 }
 
