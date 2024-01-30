@@ -4,6 +4,7 @@ import {Projects} from "../pages/Projects.tsx";
 import {NotFound} from "../pages/NotFound.tsx";
 import "./display.css"
 import {WElements} from "../pages/projects/welements/WElements.tsx";
+import {LSPAWebcams} from "../pages/projects/lspa-webcams/LSPAWebcams.tsx";
 
 export function Display(){
     return (
@@ -12,7 +13,7 @@ export function Display(){
                 <Route index element={<Start/>}/>
                 <Route path={"/projects"} element={<Projects/>}/>
                 <Route path={"/projects/welements"} element={<WElements/>}/>
-                <Route path={"/projects/lspa-webcams"} element={<h1>LSPA-Webcams</h1>}/>
+                <Route path={"/projects/lspa-webcams"} element={<LSPAWebcams/>}/>
                 <Route path={"*"} element={<NotFound/>}/>
             </Routes>
         </main>
