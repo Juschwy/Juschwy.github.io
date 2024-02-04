@@ -25,21 +25,20 @@ export function LSPAWebcams() {
     return (
         <>
             <h1>LSPA-Webcams<span style={{color: (counter % 2 == 0 ? "black" : "red")}}>●</span></h1>
-            <label>
-                <input type="checkbox" checked={intervalOn} onClick={e => setIntervalOn(e.target.checked)}/>
-                Monitoring On
-            </label>
+            <button onClick={() => setIntervalOn(intervalOn => !intervalOn)}>Monitoring {intervalOn ? "On" : "Off"}</button>
             <br/>
             <label>
                 <input type="range" min={100} max={2000} value={intervalOut}
                        onChange={e => setIntervalOut(e.target.valueAsNumber)}/>
-                Intervall in Seconds
+                Update image every {intervalOut} ms
             </label>
             <br/>
             <img className="webcam" src={"https://camwest.cumulus-segelflug.ch/snapshot.cgi?t=" + counter}
                  alt="LSPA-Webcam-West"/>
+            <br/>
             <img className="webcam" src={"https://camnord.cumulus-segelflug.ch/snap.jpeg?t=" + counter}
                  alt="LSPA-Webcam-Nord"/>
+            <br/>
             <img className="webcam" src={"https://camost.cumulus-segelflug.ch/snapshot.cgi?t=" + counter}
                  alt="LSPA-Webcam-Ost"/>
             <br/>

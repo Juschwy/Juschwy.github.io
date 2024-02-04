@@ -6,19 +6,22 @@ import {MutableRefObject, useEffect, useRef} from "react";
 
 function App() {
     const intervallIdRef = useRef<undefined | number>()
-    const titleState = useRef(">")
-    useEffect(() => {
-        console.log("test")
-        intervallIdRef.current = setInterval((titleState: MutableRefObject<string>) => {
-            titleState.current = "=" + titleState.current
-            if (titleState.current.length >= 23){
-                titleState.current = ">"
-            }
-            document.title = titleState.current
-        }, 500, titleState)
+    const titleState = useRef("=======JUSCHWY=======")
 
-        window
-    }, []);
+    function updateTitleIntervall(){
+        if (intervallIdRef.current) {
+            clearInterval(intervallIdRef.current)
+        }
+        if (document.visibilityState == "visible") {
+            intervallIdRef.current = setInterval((titleState: MutableRefObject<string>) => {
+                titleState.current = titleState.current.charAt(titleState.current.length - 1) + titleState.current.substring(0, titleState.current.length - 1)
+                document.title = titleState.current
+            }, 500, titleState)
+        }
+    }
+
+    useEffect(updateTitleIntervall, []);
+    document.addEventListener("visibilitychange", updateTitleIntervall);
 
     return (
         <>
