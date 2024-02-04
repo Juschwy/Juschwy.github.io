@@ -6,7 +6,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
 
-    div {
+    #root-link {
         height: 100%;
         display: flex;
         flex-direction: row;
@@ -19,22 +19,22 @@ header {
         }
     }
 
+    a {
+        color: white;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        color: gray;
+    }
+
     nav {
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 2rem;
         padding: 2rem;
-
-        a {
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        a:hover {
-            color: gray;
-        }
     }
 }
 
