@@ -1,13 +1,14 @@
 import "./footer.css"
+import {NavLink} from "react-router-dom";
 
 export function Footer(){
     return (
         <footer>
             <p> ©JUSCHWY</p>
             <div className="vertivalList">
-                <a href="rickTheRoll.html">Impressum</a>
+                <NavLink to={"/llor-kcir"}>Impressum</NavLink>
                 |
-                <a href="rickTheRoll.html">Kontakt</a>
+                <NavLink to={"/llor-kcir"}>Kontakt</NavLink>
             </div>
         </footer>
     )
