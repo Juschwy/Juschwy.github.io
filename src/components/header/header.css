@@ -16,6 +16,19 @@ header {
 
         img {
             height: 100%;
+            transition: 0.3s;
+        }
+
+
+    }
+
+    #root-link:hover{
+        img{
+            filter: grayscale(1);
+        }
+
+        a{
+            color: gray;
         }
     }
 
