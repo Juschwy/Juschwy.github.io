@@ -43,7 +43,8 @@ export function WElements() {
 
     function generateImg(): Promise<string> {
         if (elementsRef.current) {
-            if (Number(elementsRef.current.style.width) < window.innerWidth){
+            if (!Number.isNaN(elementsRef.current.style.width) || Number(elementsRef.current.style.width) < window.innerWidth){
+                console.log("crop image")
                 elementsRef.current.style.width = "max-content"
             }
             const png = toPng(elementsRef.current, {cacheBust: false})
