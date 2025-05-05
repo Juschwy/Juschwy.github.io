@@ -25,11 +25,10 @@ export default class Sender {
             for (let j = 0; j < dtmfFreqs[1].length; j++) {
                 const freq2 = dtmfFreqs[1][j];
                 const button: FrequencyButton = {
-                    gain1: audioContext.createGain(),
+                    gain1: new GainNode(audioContext, {gain: 0.0}),
                     osc1: audioContext.createOscillator(),
                     osc2: audioContext.createOscillator()
                 };
-                button.gain1.gain.value = 0.0;
                 button.gain1.connect(audioContext.destination);
 
                 button.osc1.type = "sine";

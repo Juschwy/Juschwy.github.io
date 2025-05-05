@@ -2,6 +2,7 @@ import {useAudioStream} from "./useAudioStream.ts";
 import {useEffect, useRef, useState} from "react";
 import {Receiver, Sender} from "./dtmf";
 import {dtmfChars} from "./dtmf/helpers.ts";
+import {Dtmf, PhoneTonePlayer} from "./dtmf/sender2.ts";
 
 //https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
 
@@ -11,6 +12,7 @@ export function AudioImageVisualizer() {
     const canvasRef = useRef<null | HTMLCanvasElement>(null);
     const receiverRef = useRef(new Receiver({duration: 100, step: 10}));
     const senderRef = useRef(new Sender({duration: 100, pause: 40}));
+    const sender2Ref = useRef(new PhoneTonePlayer())
     const [sendText, setSendText] = useState("");
     const [receivedText, setReceivedText] = useState("")
 
@@ -66,6 +68,10 @@ export function AudioImageVisualizer() {
         senderRef.current.play(sendText, () => console.log("send", sendText))
     }
 
+    function send2(){
+        sender2Ref.current.playDtmfs(sendText)
+    }
+
     function setText(text: string){
         let res = "";
         for (const char of text.toUpperCase()) {
@@ -114,6 +120,7 @@ export function AudioImageVisualizer() {
                 <p>
                     <input type="text" value={sendText} onChange={v => setText(v.target.value)}/>
                     <button onClick={send}>send</button>
+                    <button onClick={send2}>send2</button>
                 </p>
             </div>
             <hr/>
