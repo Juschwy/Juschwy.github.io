@@ -9,6 +9,7 @@ export function HistoryGuesser(){
     const {scores, setScores, clearScores} = useScores()
     const [buffer, setBuffer] = useState("")
     const [info, setInfo] = useState("")
+    const [isRecording, setIsRecording] = useState(false)
 
     /**
      * Format: #*<points>**<100 - points>*#
@@ -54,10 +55,14 @@ export function HistoryGuesser(){
             <h1>TipToi History Guesser</h1>
             <h2>Local Scores</h2>
             <p>
-                <button onClick={startStream}>Start</button>
-                <button onClick={() => {
+                <button disabled={isRecording} onClick={() => {
+                    startStream()
+                    setIsRecording(true)
+                }}>Start</button>
+                <button disabled={!isRecording} onClick={() => {
                     stopStream()
                     setBuffer("")
+                    setIsRecording(false)
                 }}>Stop
                 </button>
             </p>
