@@ -1,4 +1,4 @@
-import {dtmfChars, dtmfFreqs} from "./helpers";
+import {dtmfChars, dtmfFreqs} from "./helpers.ts";
 
 type SenderOptions = {
     duration?: number;
@@ -11,7 +11,7 @@ type FrequencyButton = {
     osc2: OscillatorNode
 }
 
-export default class Sender {
+export default class DtmfSender {
     private options: SenderOptions;
     private audioContext?: AudioContext;
     private readonly grid: FrequencyButton[][];

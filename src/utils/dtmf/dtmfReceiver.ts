@@ -1,11 +1,11 @@
-import { dtmfFreqs, dtmfChars } from "./helpers";
+import { dtmfFreqs, dtmfChars } from "./helpers.ts";
 
 type OptionsType = {
     duration?: number;
     step?: number;
 }
 
-export default class Receiver {
+export default class DtmfReceiver {
     private options: OptionsType;
     private audioContext?: AudioContext;
     private _timer?: number;

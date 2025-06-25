@@ -1,7 +1,7 @@
-import {useAudioStream} from "./useAudioStream.ts";
 import {useEffect, useRef, useState} from "react";
-import {Receiver, Sender} from "./dtmf";
-import {dtmfChars} from "./dtmf/helpers.ts";
+import {DtmfReceiver, DtmfSender} from "../../../utils/dtmf";
+import {dtmfChars} from "../../../utils/dtmf/helpers.ts";
+import {useAudioStream} from "../../../hooks/useAudioStream.ts";
 
 //https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API
 
@@ -9,8 +9,8 @@ export function AudioImageVisualizer() {
     const WIDTH = 300
     const HEIGHT = 150
     const canvasRef = useRef<null | HTMLCanvasElement>(null);
-    const receiverRef = useRef(new Receiver({duration: 100, step: 10}));
-    const senderRef = useRef(new Sender({duration: 100, pause: 40}));
+    const receiverRef = useRef(new DtmfReceiver({duration: 100, step: 10}));
+    const senderRef = useRef(new DtmfSender({duration: 100, pause: 40}));
     const [sendText, setSendText] = useState("");
     const [receivedText, setReceivedText] = useState("")
 
