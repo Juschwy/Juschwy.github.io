@@ -8,6 +8,7 @@ import {LSPAWebcams} from "../pages/projects/lspa-webcams/LSPAWebcams.tsx";
 import {Rick} from "../pages/Rick.tsx";
 import PeerTacToe from "../pages/projects/peer-tac-toe/PeerTacToe.tsx";
 import {AudioImageVisualizer} from "../pages/projects/audio-image-visualizer/AudioImageVisualizer.tsx";
+import {VsixDownloader} from "../pages/projects/vsix-downloader/VsixDownloader.tsx";
 
 export function Display(){
     return (
@@ -19,6 +20,7 @@ export function Display(){
                 <Route path={"/projects/lspa-webcams"} element={<LSPAWebcams/>}/>
                 <Route path={"/projects/peer-tac-toe"} element={<PeerTacToe/>}/>
                 <Route path={"/projects/audio-image-visualizer"} element={<AudioImageVisualizer/>}/>
+                <Route path={"/projects/vsix-downloader"} element={<VsixDownloader/>}/>
                 <Route path={"/llor-kcir"} element={<Rick/>}/>
                 <Route path={"*"} element={<NotFound/>}/>
             </Routes>
